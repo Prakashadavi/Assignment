@@ -48,6 +48,7 @@ const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
 const dots = document.querySelectorAll(".dot");
 
+/* INITIAL LOAD */
 mainImage.src = images[currentIndex];
 updateDots();
 updateButtons();

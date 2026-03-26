@@ -48,20 +48,24 @@ const prevBtn = document.querySelector(".prev");
 const nextBtn = document.querySelector(".next");
 const dots = document.querySelectorAll(".dot");
 
+/* INITIAL LOAD */
 mainImage.src = images[currentIndex];
 updateDots();
 updateButtons();
 
+/* UPDATE DOTS */
 function updateDots() {
   dots.forEach(dot => dot.classList.remove("active"));
   dots[currentIndex].classList.add("active");
 }
 
+/* DISABLE BUTTONS AT EDGES */
 function updateButtons() {
   prevBtn.disabled = currentIndex === 0;
   nextBtn.disabled = currentIndex === images.length - 1;
 }
 
+/* NEXT BUTTON *
 nextBtn.addEventListener("click", () => {
   if (currentIndex < images.length - 1) {
     currentIndex++;
