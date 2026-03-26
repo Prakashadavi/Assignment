@@ -88,73 +88,15 @@ dots.forEach((dot, index) => {
   });
 });
 
-function connectRadioToGallery(radioName) {
-  const radios = document.querySelectorAll(`input[name="${radioName}"]`);
+const fragrance2Radios = document.querySelectorAll("input[name='fragrance2']");
+const mainImage = document.getElementById("mainImage");
 
-  radios.forEach((radio) => {
-    radio.addEventListener("change", () => {
-      if (radio.checked) {
-        const card = radio.closest(".perfume-card");
-        const imgSrc = card.querySelector("img").src;
-
-        mainImage.src = imgSrc;
-
-        const normalized = imgSrc.split('/').pop().toLowerCase();
-
-        const index = images.findIndex(i =>
-          i.toLowerCase().includes(normalized)
-        );
-
-        if (index !== -1) {
-          currentIndex = index;
-          updateGallery(index);
-        }
-      }
-    });
-  });
-}
-
-connectRadioToGallery("fragrance");
-connectRadioToGallery("fragrance1");
-connectRadioToGallery("fragrance2");
-
-
-const cartBtn = document.querySelector(".cart-btn");
-
-function getSelectedText(name) {
-  const selected = document.querySelector(`input[name="${name}"]:checked`);
-  if (!selected) return "";
-  return selected.closest(".top").querySelector("span").innerText.trim();
-}
-
-function getPlan() {
-  const selected = document.querySelector('input[name="plan"]:checked');
-  return selected ? selected.value : "";
-}
-
-function getCartLink() {
-  const plan = getPlan();
-
-  let fragrance = "";
-
-  if (plan === "single") {
-    fragrance = getSelectedText("fragrance");
-  } else if (plan === "double") {
-    const f1 = getSelectedText("fragrance1");
-    const f2 = getSelectedText("fragrance2");
-    fragrance = `${f1}-${f2}`;
-  }
-
-  return `#?plan=${plan}&fragrance=${fragrance}`;
-}
-
-cartBtn.addEventListener("click", () => {
-  const link = getCartLink();
-  window.location.href = link;
-});
-
-document.querySelectorAll('input[type="radio"]').forEach(radio => {
+fragrance2Radios.forEach(radio => {
   radio.addEventListener("change", () => {
-    console.log(getCartLink());
+    if (radio.checked) {
+      const card = radio.closest(".perfume-card");
+      const img = card.querySelector("img");
+      mainImage.src = img.src;
+    }
   });
 });

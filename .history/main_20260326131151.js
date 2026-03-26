@@ -119,6 +119,7 @@ connectRadioToGallery("fragrance1");
 connectRadioToGallery("fragrance2");
 
 
+
 const cartBtn = document.querySelector(".cart-btn");
 
 function getSelectedText(name) {
@@ -132,7 +133,7 @@ function getPlan() {
   return selected ? selected.value : "";
 }
 
-function getCartLink() {
+function updateCartLink() {
   const plan = getPlan();
 
   let fragrance = "";
@@ -145,16 +146,15 @@ function getCartLink() {
     fragrance = `${f1}-${f2}`;
   }
 
-  return `#?plan=${plan}&fragrance=${fragrance}`;
+  const link = `#?plan=${plan}&fragrance=${fragrance}`;
+
+  cartBtn.onclick = () => {
+    window.location.href = link;
+  };
 }
 
-cartBtn.addEventListener("click", () => {
-  const link = getCartLink();
-  window.location.href = link;
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+  radio.addEventListener("change", updateCartLink);
 });
 
-document.querySelectorAll('input[type="radio"]').forEach(radio => {
-  radio.addEventListener("change", () => {
-    console.log(getCartLink());
-  });
-});
+updateCartLink();
